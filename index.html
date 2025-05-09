@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARK 🍔 Hamburgueria</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ffac41;
+      --secondary: #262626;
+      --accent: #fc5185;
+      --white: #fff;
+    }
+    body {
+      background: var(--secondary);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    header {
+      background: var(--primary);
+      color: var(--secondary);
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    h2 {
+      color: var(--primary);
+      margin-top: 2rem;
+    }
+    .card-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .product-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px #0004;
+      width: 300px;
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.04);
+    }
+    .product-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+    .product-card .info {
+      padding: 1rem;
+      text-align: center;
+      color: var(--white);
+    }
+    .product-card .price {
+      color: var(--accent);
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: .5rem;
+    }
+    .product-card .select-btn {
+      background: var(--primary);
+      color: var(--secondary);
+      font-weight: bold;
+      padding: .5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: .5rem;
+      font-size: 1.1rem;
+      transition: background .2s;
+    }
+    .product-card .select-btn.selected {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .pedido-section {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .whatsapp-btn {
+      background: #25d366;
+      color: var(--secondary);
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 40px;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      text-decoration: none;
+    }
+    .whatsapp-btn:hover {
+      background: #128c7e;
+      color: var(--white);
+    }
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+    .social-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      padding: .7rem 1.6rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .social-btn:hover {
+      background: var(--primary);
+      color: var(--secondary);
+    }
+    /* Instagram Gallery */
+    .instagram-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .insta-photo {
+      width: 170px;
+      height: 170px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px #0009;
+      background: #222;
+    }
+    .insta-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width:700px) {
+      .card-list {flex-direction: column;align-items: center;}
+      .product-card {width:94%;}
+    }
+
+    .lead-campaign {
+  background: linear-gradient(90deg, #fc5185 35%, #1a1a1a 100%);
+  color: #fff;
+  padding: 2.5rem 1rem;
+  border-radius: 20px;
+  margin: 2rem auto 3rem auto;
+  max-width: 650px;
+  box-shadow: 0 2px 20px #0006;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lead-container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lead-info h2 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  color: #ffac41;
+  text-align: center;
+}
+.lead-info p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+}
+.lead-form input {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  margin: 0 auto;
+  background: #fff;
+  color: #222;
+}
+.lead-form input:focus { outline: 2px solid #fc5185; }
+.lead-form button {
+  background: #ffac41;
+  color: #1a1a1a;
+  font-weight: bold;
+  padding: 0.8rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: .4rem;
+  transition: background .2s;
+}
+.lead-form button:hover {
+  background: #fc5185;
+  color: #fff;
+}
+.lead-msg {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+@media (max-width: 500px) {
+  .lead-campaign { padding: 1rem 0.2rem; }
+  .lead-info h2 { font-size: 1.2rem; }
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    ARK 🍔 Hamburgueria
+  </header>
+  <div class="container">
+    <h2>Destaques do Cardápio</h2>
+    <div class="card-list" id="productList">
+      <!-- Produtos serão carregados por JS -->
+    </div>
+    <div class="pedido-section">
+      <h2>Monte seu pedido!</h2>
+      <p>Selecione seus hambúrgueres favoritos e clique para pedir diretamente pelo WhatsApp:</p>
+      <a class="whatsapp-btn" id="whatsappLink" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="icon" width="25" height="25">
+        Pedir pelo WhatsApp
+      </a>
+    </div>
+    <h2>Galeria do Instagram</h2>
+    <div class="instagram-gallery" id="instaGallery">
+      <!-- Galeria dinâmica, veja nota abaixo -->
+    </div>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://wa.me/5511999999999" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="22"> WhatsApp
+      </a>
+      <a class="social-btn" href="https://instagram.com/nome_da_empresa" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" width="22"> Instagram
+      </a>
+      <a class="social-btn" href="https://facebook.com/nome_da_empresa" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="22"> Facebook
+      </a>
+    </div>
+  </div>
+  <div>
+    <section class="lead-campaign">
+        <div class="lead-container">
+          <div class="lead-info">
+            <h2>🍔 Faça Parte do Clube ARK!</h2>
+            <p>Receba ofertas exclusivas, novidades e participe de sorteios de hambúrgueres toda semana!</p>
+          </div>
+          <form class="lead-form" id="leadForm">
+            <input type="text" name="nome" placeholder="Seu nome" required>
+            <input type="tel" name="whatsapp" placeholder="WhatsApp (com DDD)" required pattern="\d{10,13}">
+            <button type="submit">Quero Receber Ofertas!</button>
+          </form>
+          <div id="leadMsg" class="lead-msg"></div>
+        </div>
+      </section>
+  </div>
+  <script>
+    // Dados dos produtos: personalize com imagens verdadeiras dos seus hambúrgueres
+    const produtos = [
+      {
+        nome: "Classic Burguer",
+        descricao: "Pão brioche, burger 180g, queijo prato, alface, tomate, maionese ARK.",
+        preco: 29.90,
+        img: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        nome: "Ark Bacon",
+        descricao: "Burger 180g, cheddar derretido, bacon crocante, cebola roxa caramelizada.",
+        preco: 34.90,
+        img: "https://images.unsplash.com/photo-1519864600265-c3da51e99c31?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        nome: "Veggie Lovers",
+        descricao: "Burger de grão-de-bico, queijo prato, tomate fresco e molho vegano.",
+        preco: 32.00,
+        img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+      }
+    ];
+    // Renderiza os cards
+    const productList = document.getElementById('productList');
+    produtos.forEach((prod, i) => {
+      const card = document.createElement('div');
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${prod.img}" alt="${prod.nome}">
+        <div class="info">
+          <div class="price">R$ ${prod.preco.toFixed(2)}</div>
+          <h3>${prod.nome}</h3>
+          <p>${prod.descricao}</p>
+          <button class="select-btn" data-index="${i}">Selecionar</button>
+        </div>
+      `;
+      productList.appendChild(card);
+    });
+    // Seleção de produtos para pedido via WhatsApp
+    const selectBtns = document.querySelectorAll('.select-btn');
+    let selecionados = [];
+    selectBtns.forEach(btn => {
+      btn.onclick = () => {
+        const i = Number(btn.dataset.index);
+        if(selecionados.includes(i)) {
+          selecionados = selecionados.filter(idx => idx !== i);
+          btn.classList.remove('selected');
+        } else {
+          selecionados.push(i);
+          btn.classList.add('selected');
+        }
+        atualizarLinkWhatsapp();
+      };
+    });
+    function atualizarLinkWhatsapp() {
+      const link = document.getElementById('whatsappLink');
+      if(selecionados.length === 0) {
+        link.href = "https://wa.me/5511999999999";
+        link.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="25"> Pedir pelo WhatsApp`;
+        return;
+      }
+      let texto = "*Olá, gostaria de fazer um pedido:*\n";
+      selecionados.forEach(i => {
+        texto += `🍔 ${produtos[i].nome} - R$ ${produtos[i].preco.toFixed(2)}\n`;
+      });
+      texto += "\nEndereço e observações:";
+      const msg = encodeURIComponent(texto);
+      link.href = `https://wa.me/5511999999999?text=${msg}`;
+      link.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="25"> Enviar Pedido (${selecionados.length})`;
+    }
+    // Galeria Instagram - Simulação de fotos estáticas (por limitações de API Instagram)
+    const instaGallery = document.getElementById('instaGallery');
+    const instaImgs = [
+      "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=400&q=80"
+    ];
+    instaImgs.forEach(url => {
+      const photo = document.createElement('div');
+      photo.className = "insta-photo";
+      photo.innerHTML = `<img src="${url}">`;
+      instaGallery.appendChild(photo);
+    });
+    // Para galeria real, integrar Instagram Graph API e renderizar fotos recentes do perfil oficial
+
+    // Exemplo de submissão simulada do formulário
+document.getElementById('leadForm').onsubmit = function(e) {
+  e.preventDefault();
+  // Captura os campos
+  const nome = this.nome.value.trim();
+  const whatsapp = this.whatsapp.value.trim();
+  // --- Aqui você pode integrar com algum backend, Google Forms, Sheet, ou serviço de e-mail marketing! ---
+  document.getElementById('leadMsg').innerHTML = `Obrigado, ${nome}! Em breve você receberá nossas ofertas no WhatsApp. 🍔`;
+  this.reset();
+};
+
+  </script>
+</body>
+</html>
